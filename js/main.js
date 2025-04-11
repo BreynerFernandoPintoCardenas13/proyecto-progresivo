@@ -19,12 +19,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${character.image}" alt="${character.name}">
             <div class="div-cardText">
               <div class="div-nameState">
-                <a href="#"><h2>${character.name}</h2></a>
+                <a href="../pages/character.html?id=${character.id}"><h2>${character.name}</h2></a>
                 <h3>${character.status}</h3>
               </div>
               <div class="div-location">
                 <span class="span-1">Last known location:</span>
-                <a href="#"><span class="span-2">${character.location.name}</span></a>
+                <a href="../pages/location.html?id=${character.id}"><span class="span-2">${character.location.name}</span></a>
               </div>
               <div class="div_seen">
                 <span class="span-1">First seen in:</span>
@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${character.image}" alt="${character.name}">
             <div class="div-cardText">
               <div class="div-nameState">
-                <a href="#"><h2>${character.name}</h2></a>
+                <a href="../pages/character.html?id=${character.id}"><h2>${character.name}</h2></a>
                 <h3 id="state">${guardarEmoji}</h3>
               </div>
               <div class="div-location">
                 <span class="span-1">Last known location:</span>
-                <a href="#"><span class="span-2">${character.location.name}</span></a>
+                <a href="../pages/location.html?id=${character.id}"><span class="span-2">${character.location.name}</span></a>
               </div>
               <div class="div_seen">
                 <span class="span-1">First seen in:</span>
@@ -137,12 +137,12 @@ searchInput.addEventListener("input", (e) => {
           <img src="${character.image}" alt="${character.name}">
           <div class="div-cardText">
             <div class="div-nameState">
-              <a href="#"><h2>${character.name}</h2></a>
+                <a href="../pages/character.html?id=${character.id}"><h2>${character.name}</h2></a>
               <h3>${character.status}</h3>
             </div>
             <div class="div-location">
               <span class="span-1">Last known location:</span>
-              <a href="#"><span class="span-2">${character.location.name}</span></a>
+                <a href="../pages/location.html?id=${character.id}"><span class="span-2">${character.location.name}</span></a>
             </div>
             <div class="div_seen">
               <span class="span-1">First seen in:</span>
@@ -159,6 +159,8 @@ searchInput.addEventListener("input", (e) => {
       console.error("Error en búsqueda:", error);
     });
 });
+
+/* FILTROOO GENDERRRRRRRRRRRRRRR */
 const genderFilter = document.getElementById("genderFilter");
 
 genderFilter.addEventListener("change", () => {
@@ -189,12 +191,12 @@ genderFilter.addEventListener("change", () => {
           <img src="${character.image}" alt="${character.name}">
           <div class="div-cardText">
             <div class="div-nameState">
-              <a href="#"><h2>${character.name}</h2></a>
+                <a href="../pages/character.html?id=${character.id}"><h2>${character.name}</h2></a>
               <h3>${character.status}</h3>
             </div>
             <div class="div-location">
               <span class="span-1">Last known location:</span>
-              <a href="#"><span class="span-2">${character.location.name}</span></a>
+                <a href="../pages/location.html?id=${character.id}"><span class="span-2">${character.location.name}</span></a>
             </div>
             <div class="div_seen">
               <span class="span-1">First seen in:</span>
@@ -211,7 +213,59 @@ genderFilter.addEventListener("change", () => {
       console.error("Error al filtrar:", error);
     });
 });
+/* FILTRO STATEEEEEEEEEEEEEEEEEEEEE */
+const stateFilter = document.getElementById("stateFilter");
 
+stateFilter.addEventListener("change", () => {
+  const state = stateFilter.value; // 'male', 'female', 'unknown' o ''
+  const query = searchInput.value.trim().toLowerCase(); // nombre buscado si hay
+
+  let url = `https://rickandmortyapi.com/api/character/?`;
+
+  if (query) {
+    url += `name=${query}&`;
+  }
+
+  if (state) {
+    url += `status=${state}`;
+  }
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("container__main");
+      container.innerHTML = "";
+
+      data.results.forEach(character => {
+        const card = document.createElement("div");
+        card.classList.add("div-card");
+
+        card.innerHTML = `
+          <img src="${character.image}" alt="${character.name}">
+          <div class="div-cardText">
+            <div class="div-nameState">
+                <a href="../pages/character.html?id=${character.id}"><h2>${character.name}</h2></a>
+              <h3>${character.status}</h3>
+            </div>
+            <div class="div-location">
+              <span class="span-1">Last known location:</span>
+                <a href="../pages/location.html?id=${character.id}"><span class="span-2">${character.location.name}</span></a>
+            </div>
+            <div class="div_seen">
+              <span class="span-1">First seen in:</span>
+              <a href="#"><span class="span-2">${character.origin.name}</span></a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(error => {
+      const container = document.getElementById("container__main");
+      container.innerHTML = "<p style='color:white;'>No se encontraron personajes con ese filtro.</p>";
+      console.error("Error al filtrar:", error);
+    });
+});
 
 
 /* SIDE BARRRRRR */

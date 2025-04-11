@@ -414,3 +414,376 @@ main {
   display: block;
 }
 
+
+
+/* ESTILO PARA LOS INPUTS YEAHHHHHHHHH */
+
+/* === INPUT DE BÚSQUEDA === */
+.sidebar input {
+  background-color: #1f1f1f;
+  color: #00ffff;
+  border: 2px solid #00ffff60;
+  padding: 12px 16px;
+  margin: 20px auto;
+  width: 80%;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.sidebar input[type="text"]::placeholder {
+  color: #ccc;
+  font-style: italic;
+}
+
+.sidebar input[type="text"]:focus {
+  outline: none;
+  border-color: #00ffff;
+  box-shadow: 0 0 10px #00ffffaa;
+}
+
+/* === SELECTS (FILTROS) === */
+.sidebar select {
+  background-color: #1f1f1f;
+  color: #00ffcc;
+  border: 2px solid #00ffcc60;
+  padding: 10px 14px;
+  margin: 10px auto 20px auto;
+  width: 80%;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: block;
+  appearance: none;
+  cursor: pointer;
+}
+
+.sidebar select:hover {
+  background-color: #2a2a2a;
+  border-color: #00ffcc;
+}
+
+.sidebar select:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00ffccaa;
+}
+.location-card {
+  background: #1f2833;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,255,0,0.3);
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+.location-card h1 {
+  font-size: 2.2rem;
+  color: #66fcf1;
+  margin-bottom: 1rem;
+}
+
+.info p {
+  margin: 0.5rem 0;
+}
+
+.residents {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.resident-card {
+  background: #0b0c10;
+  border: 1px solid #45a29e;
+  border-radius: 15px;
+  padding: 1rem;
+  width: 140px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.resident-card:hover {
+  transform: scale(1.05);
+}
+
+.resident-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.resident-card a {
+  color: #66fcf1;
+  text-decoration: none;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.resident-card a:hover {
+  color: white;
+}
+
+.back-link {
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #66fcf1;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+.character-card {
+  background: #1f2833;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,255,0,0.3);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.character-card img {
+  width: 200px;
+  border-radius: 50%;
+  border: 4px solid #45a29e;
+}
+
+.character-card h1 {
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #66fcf1;
+}
+
+.info {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.info p {
+  margin: 0.5rem 0;
+}
+
+.back-link {
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #66fcf1;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+
+/* === ESTILOS RESPONSIVOS PARA CELULARES === */
+@media screen and (max-width: 768px) {
+
+  /* HERO */
+  #hero {
+    height: 600px;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .nav__header h1 {
+    font-size: 12vw;
+    padding-bottom: 2rem;
+  }
+
+  .logo {
+    width: 20%;
+    top: -100px;
+  }
+
+  /* PORTAL WRAPPER */
+  .portal-wrapper {
+    height: 400px;
+  }
+
+  .portal-animation {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .portal-text {
+    font-size: 12vw;
+    text-align: center;
+  }
+
+  /* SIDEBAR Y BOTÓN */
+  #btn-sidebar {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .sidebar {
+    width: 70%;
+    padding-top: 60px;
+  }
+
+  /* CARDS */
+  .container__main {
+    margin-top: 100px;
+    margin-right: 20px;
+    padding: 20px;
+    gap: 150px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .div-card {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .div-card:hover {
+    width: 100%;
+    height: auto;
+    transform: scale(1);
+    border-radius: 20px;
+  }
+
+  .div-card img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .div-cardText {
+    margin: 10px 0 0 0;
+    align-items: flex-start;
+  }
+
+  .div-nameState h2 {
+    font-size: 6vw;
+  }
+
+  .div-nameState h3 {
+    font-size: 4vw;
+  }
+
+  .div-location a {
+    font-size: 4vw;
+  }
+
+  .span-1 {
+    font-size: 4vw;
+  }
+
+  /* INPUTS Y SELECTS EN SIDEBAR */
+  .sidebar{
+    width: 0;
+  }
+  .sidebar input,
+  .sidebar select {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  /* Ajustes del submenú */
+  .submenu-genero {
+    position: static;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .submenu-genero div {
+    background-color: #1f1f1f;
+    margin-top: 5px;
+    border-radius: 5px;
+  }
+
+}
+
+/* === RESPONSIVE PARA SMARTWATCH (pantallas <= 400px) === */
+@media screen and (max-width: 400px) {
+
+  #hero {
+    height: auto;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav__header h1,
+  .portal-text {
+    font-size: 7vw;
+    text-align: center;
+  }
+
+  .logo {
+    width: 40%;
+    top: -50px;
+  }
+
+  .portal-wrapper {
+    height: 250px;
+  }
+
+  .portal-animation {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+  #btn-sidebar {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    top: 5px;
+    left: 5px;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    font-size: 4vw;
+  }
+
+  .sidebar input,
+  .sidebar select {
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .container__main {
+    gap: 30px;
+    padding: 10px;
+  }
+
+  .div-card {
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .div-card img {
+    width: 100%;
+  }
+
+  .div-nameState h2,
+  .div-nameState h3,
+  .div-location a,
+  .span-1 {
+    font-size: 5vw;
+  }
+
+  /* Reduce o elimina animaciones pesadas si es necesario */
+  .portal-animation,
+  .splitting .char {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+}

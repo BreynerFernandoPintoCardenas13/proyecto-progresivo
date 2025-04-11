@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personaje - Rick and Morty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .character-card {
+      background: #1f2833;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,255,0,0.3);
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .character-card img {
+      width: 200px;
+      border-radius: 50%;
+      border: 4px solid #45a29e;
+    }
+
+    .character-card h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+      color: #66fcf1;
+    }
+
+    .info {
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    .info p {
+      margin: 0.5rem 0;
+    }
+
+    .back-link {
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #66fcf1;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="character-card">
+    <img id="characterImage" alt="Personaje" />
+    <h1 id="characterName">Cargando...</h1>
+    <div class="info">
+      <p><strong>Estado:</strong> <span id="characterStatus"></span></p>
+      <p><strong>Especie:</strong> <span id="characterSpecies"></span></p>
+      <p><strong>Género:</strong> <span id="characterGender"></span></p>
+      <p><strong>Origen:</strong> <span id="characterOrigin"></span></p>
+      <p><strong>Ubicación actual:</strong> <a href="#" id="characterLocationLink"></a></p>
+    </div>
+  </div>
+
+  <a href="../index.html" class="back-link">← Volver al inicio</a>
+
+  <script>
+    // Función para obtener parámetros de la URL
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const id = getParam('id');
+
+    // Verifica si hay un ID válido
+    if (!id) {
+      document.body.innerHTML = '<h2>❌ ID de personaje no proporcionado.</h2>';
+    } else {
+      fetch(`https://rickandmortyapi.com/api/character/${id}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No se encontró el personaje');
+          }
+          return response.json();
+        })
+        .then(data => {
+          document.getElementById('characterName').textContent = data.name;
+          document.getElementById('characterImage').src = data.image;
+          document.getElementById('characterStatus').textContent = data.status;
+          document.getElementById('characterSpecies').textContent = data.species;
+          document.getElementById('characterGender').textContent = data.gender;
+          document.getElementById('characterOrigin').textContent = data.origin.name;
+
+          const locationLink = document.getElementById('characterLocationLink');
+          locationLink.textContent = data.location.name;
+          locationLink.href = `location.html?id=${getIdFromURL(data.location.url)}`;
+        })
+        .catch(err => {
+          document.body.innerHTML = `<h2>⚠️ Error: ${err.message}</h2>`;
+        });
+    }
+
+    // Extrae el ID desde una URL como: "https://rickandmortyapi.com/api/location/20"
+    function getIdFromURL(url) {
+      const parts = url.split('/');
+      return parts[parts.length - 1];
+    }
+  </script>
+</body>
+</html>

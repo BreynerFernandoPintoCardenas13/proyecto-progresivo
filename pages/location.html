@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ubicación - Rick and Morty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      font-family: 'Orbitron', sans-serif;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .location-card {
+      background: #1f2833;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,255,0,0.3);
+      padding: 2rem;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .location-card h1 {
+      font-size: 2.2rem;
+      color: #66fcf1;
+      margin-bottom: 1rem;
+    }
+
+    .info p {
+      margin: 0.5rem 0;
+    }
+
+    .residents {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .resident-card {
+      background: #0b0c10;
+      border: 1px solid #45a29e;
+      border-radius: 15px;
+      padding: 1rem;
+      width: 140px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .resident-card:hover {
+      transform: scale(1.05);
+    }
+
+    .resident-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .resident-card a {
+      color: #66fcf1;
+      text-decoration: none;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .resident-card a:hover {
+      color: white;
+    }
+
+    .back-link {
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #66fcf1;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="location-card">
+    <h1 id="locationName">Cargando...</h1>
+    <div class="info">
+      <p><strong>Tipo:</strong> <span id="locationType"></span></p>
+      <p><strong>Dimensión:</strong> <span id="locationDimension"></span></p>
+    </div>
+    <h3>Residentes:</h3>
+
+    <div class="residents" id="residentsContainer">
+      <!-- Residentes serán cargados aquí -->
+    </div>
+  </div>
+
+  <a href="../index.html" class="back-link">← Volver al inicio</a>
+
+  <script>
+    function getParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const id = getParam('id');
+
+    if (!id) {
+      document.body.innerHTML = '<h2>❌ ID de ubicación no proporcionado.</h2>';
+    } else {
+      fetch(`https://rickandmortyapi.com/api/location/${id}`)
+        .then(res => {
+          if (!res.ok) throw new Error('No se encontró la ubicación');
+          return res.json();
+        })
+        .then(async location => {
+          document.getElementById('locationName').textContent = location.name;
+          document.getElementById('locationType').textContent = location.type || 'Desconocido';
+          document.getElementById('locationDimension').textContent = location.dimension || 'Desconocido';
+
+          const residentsContainer = document.getElementById('residentsContainer');
+
+          if (location.residents.length === 0) {
+            residentsContainer.innerHTML = '<p>No hay residentes conocidos.</p>';
+            return;
+          }
+
+          // Cargar datos de residentes
+          const residentIDs = location.residents.map(url => url.split('/').pop());
+          const batchURL = `https://rickandmortyapi.com/api/character/${residentIDs.join(',')}`;
+
+          const residents = await fetch(batchURL).then(res => res.json());
+
+          const residentList = Array.isArray(residents) ? residents : [residents];
+
+          residentList.forEach(res => {
+            const card = document.createElement('div');
+            card.classList.add('resident-card');
+
+            card.innerHTML = `
+              <img src="${res.image}" alt="${res.name}">
+              <a href="character.html?id=${res.id}">${res.name}</a>
+            `;
+
+            residentsContainer.appendChild(card);
+          });
+        })
+        .catch(err => {
+          document.body.innerHTML = `<h2>⚠️ Error: ${err.message}</h2>`;
+        });
+    }
+  </script>
+</body>
+</html>
