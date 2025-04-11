@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@900&display=swap");
+@import url("variable.css");
+
+body {
+    margin: 0;
+    background-color: #323131;
+    font-family: Arial, sans-serif;
+  }
+
+header{
+/* background-color: aqua;
+ */display: flex;
+ z-index: -10;
+
+ width: 100%;
+ height: 700px;
+}
+
+/* 
+    BUTTONNNNN
+*/
+
+
+
+    #hero {
+      transition: height 0.5s ease;
+      overflow: hidden;
+      position: relative;
+      position: relative;
+      width: 100%;
+      height: 1000px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      z-index: 1;
+    }
+
+#hero canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9; /* detrás del texto */
+  }
+.nav__header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+.dot{
+
+}
+.nav__header h1 {
+  margin: 0;
+  color: #4db1bc;
+  padding-bottom: 6rem;
+  grid-column: 1;
+  grid-row: 1;
+  
+  text-shadow: 
+  2px 2px 2px yellow,
+  2px 2px 2px yellow,
+  2px 2px 2px yellow,
+  2px 2px 2px yellow;
+  z-index: 10;
+  font-family: "rick-font";
+  font-size: 10vw;
+  text-transform: uppercase;
+  animation: glow 2s ease-in-out infinite alternate;
+  text-align: center;
+}
+.portal-text h1 {
+  animation: floatInSpace 2s ease-in-out infinite;
+}
+
+@keyframes floatInSpace {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+.logo {
+/*   background-color: green;
+ */  width:6% ;
+  display: flex;
+  top: -200px;
+  position: relative;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+.logo img{
+  width: 100%;
+}
+
+main {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #btn-sidebar {
+    position: fixed;        /* Se queda fijo en pantalla */
+    top: 20px;              /* Distancia desde arriba */
+    left: 20px;             /* Distancia desde la izquierda */
+    z-index: 1000;          /* Asegura que quede por encima de todo */
+    background-color: #2d9da9;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    padding: 12px 16px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  #btn-sidebar:hover {
+    background-color: #DCDCDC;
+    color: #000;
+    transform: scale(1.05);
+    box-shadow: 0 0 1em rgba(255, 255, 255, 1);
+  }
+
+
+.article__sidebar {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.article__sidebar img{
+  background-color: red;
+  z-index: 5;
+}
+
+.sidebar {
+  height: 100%;
+  position: fixed;
+  width: 0px;
+  top: 0;
+  left: 0;
+  background-color: #252522;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index: 1000;
+}
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; 
+  z-index: 999; 
+}
+.sidebar img{
+  width: 100%;
+}
+.sidebar ul{
+  width: 100%;
+  list-style: none;
+  padding: 30px;
+}
+.sidebar ul li a{
+  text-decoration: none;
+  padding: 10px 20px;
+}
+.sidebar ul li a:hover{
+  background-color: #575757;
+  text-decoration: none;
+}
+.sidebar ul li a img{
+}
+.article__main {
+}
+.container__main {
+}
+.card {
+}
+
+/* ANIMACION TITULO */
+@keyframes portal-spin {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.portal-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 600px;
+}
+
+.portal-animation {
+  position: absolute;
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  max-height: 400px;
+  animation: portal-spin 4s ease-in-out forwards;
+  z-index: 11;
+}
+
+.portal-animation img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.portal-text {
+  opacity: 0;
+  z-index: 12;
+  transition: opacity 1s ease;
+  animation: showTitle 1s ease forwards;
+  animation-delay: 3s;
+  font-family: "rick-font";
+  font-size: 10vw;
+  color: #7fff00;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #7fff00;
+  text-transform: uppercase;
+}
+
+@keyframes showTitle {
+  to {
+    opacity: 1;
+  }
+}
+
+
+/*  CARDSSSSS  */
+
+.article__main {
+  margin: -100px 10px  0 30px;
+}
+.container__main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 200px;
+  justify-content: space-between;
+  padding: 80px;
+}
+.div-card {
+  display: flex;
+  background-color: #222;
+  width: 550px;
+  height: 250px;
+  border-radius: 10px;
+  margin-top: -100px;
+  transition: all 0.3s ease;
+  
+  transform-origin: center;
+}
+.div-card h2,
+.div-card h3,
+.div-card span,
+.div-card a {
+  transition: all 0.4s ease-in-out;
+}
+
+.div-card:hover {
+/*   box-shadow: 10px 10px 25px 2px rgba(0, 255, 255, 0.4);
+ */  width: 630px;
+  border-radius: 50px;
+  height: 300px;
+  transform: scale(1.span-1);
+}
+.div-card:hover h2 {
+  font-size: 40px;
+}
+.div-card:hover h3 {
+  font-size: 25px;
+}
+.div-card:hover span {
+  font-size: 20px;
+}
+.div-card img{
+  width: 200px;
+  border-radius: 10px;
+}
+.div-cardText {
+  display: flex;
+  margin-left: 20px;
+  gap: 10px;
+  position: relative;
+  flex-direction: column;
+  margin-top: -10px;
+}
+.div-nameState {
+  display: flex;
+  flex-direction: column;
+  gap:-30px ;
+}
+.div-nameState a{
+  text-decoration: none;
+}
+.div-nameState h2{
+  position: relative;
+  color: #fff;
+  font-size: 2vw;
+}
+.div-nameState h2:hover{
+  color: green;
+}
+.div-nameState h3{
+  position: relative;
+  top: -30px;
+  color: #fff;
+}
+
+.div-location {
+  margin-top:-40px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+.div-location a{
+  text-decoration: none;
+  color: #fff;
+}
+.div-location a:hover{
+  color: green;
+}
+
+.character-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.character-card.animate-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.span-1{
+  color: #5a5757;
+  font-size: 18px;
+}
+.div_seen a{
+  text-decoration: none;
+  color: #fff;
+}
+.div_seen a:hover{
+  color: green;
+}
+.span-2{
+  
+}
+.div_seen {
+  display: flex;
+    gap: 5px;
+  flex-direction: column;
+}
+
+/* Estilo del contenedor del género */
+.sidebar-option {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Estilo del submenú que está oculto por defecto */
+.submenu-genero {
+  display: none;
+  position: absolute;
+  top: 100%; /* debajo del título "Género" */
+  left: 0;
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  width: max-content;
+}
+
+/* Estilo para cada opción de género */
+.submenu-genero div {
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.submenu-genero div:hover {
+  background-color: #333;
+}
+
+/* Mostrar el submenú cuando el mouse está encima de la opción */
+.sidebar-option:hover .submenu-genero {
+  display: block;
+}
+

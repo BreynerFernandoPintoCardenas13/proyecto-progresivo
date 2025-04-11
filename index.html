@@ -1,0 +1,146 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="./css/style.css">
+      
+      <style>
+      
+    
+      </style>
+  </head>
+
+  <body>
+      <header>
+          <div class="hero" id="hero">
+              <nav class="nav__header">
+                <div class="portal-wrapper">
+                  <div class="portal-animation">
+                    <img src="storage/img/rickPepinillo.png" alt="">
+
+                  </div>
+                  <div class="portal-text">
+                    <h1 class="title" id="" data-splitting>Rick and Morty</h1>
+                  </div>
+                </div>   
+                  
+              </nav>
+          </div>
+        
+      </header>
+      <main>
+          
+          <button id="btn-sidebar" class="btn-sidebar">☰</button>
+          
+          <div class="sidebar" id="article__sidebar">
+              <img src="storage/img/logo2.png" alt="">
+              <input type="text" id="searchInput" placeholder="Buscar personaje..." />
+                   
+                 <div class="sidebar-option" id="generoOption">
+                    <span>Género</span>
+                    <div id="submenuGenero" class="submenu-genero">
+                      <div data-genero="Male">Male</div>
+                      <div data-genero="Female">Female</div>
+                      <div data-genero="unknown">Unknown</div>
+                    </div>
+                  </div>
+                  
+                  <a href="#">Estado</a>
+                  <a href="#">Salir</a>
+          </div>
+          <div id="overlay" class="overlay"></div>
+          
+          <article class="article__main" id="article__main">
+            <div class="container__main" id="container__main">
+              <!-- Las cards se agregarán aquí -->
+            </div>
+          </article>
+  </main>
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+  <script>
+    let estrellas = [];
+    let imagenes = [];
+    let objetos = []; // objetos flotantes
+    let canvas;
+
+    function preload() {
+      // Carga tus imágenes (ajusta nombres según tus archivos)
+      imagenes.push(loadImage('storage/img/gun.png'));
+      imagenes.push(loadImage('storage/img/alien.png'));
+      imagenes.push(loadImage('storage/img/portal.png'));
+    }
+
+    function setup() {
+      const contenedor = document.getElementById("hero");
+      canvas = createCanvas(contenedor.offsetWidth, contenedor.offsetHeight);
+      canvas.parent("hero");
+
+      // Estrellas
+      for (let i = 0; i < 100; i++) {
+        estrellas.push({
+          x: random(width),
+          y: random(height),
+          size: random(1, 3),
+          alpha: random(100, 255),
+          speed: random(0.5, 2),
+          direction: random([1, -1])
+        });
+      }
+
+      // Objetos flotantes
+      for (let i = 0; i < imagenes.length; i++) {
+        objetos.push({
+          img: imagenes[i],
+          x: random(width),
+          y: random(height),
+          speedX: random(0.3, 1),
+          speedY: random(-0.3, 0.3),
+          size: random(100, 100)
+        });
+      }
+    }
+
+    function draw() {
+      clear();
+      background(0);
+      noStroke();
+
+      // Dibujar estrellas
+      estrellas.forEach((estrella) => {
+        fill(255, estrella.alpha);
+        ellipse(estrella.x, estrella.y, estrella.size);
+
+        estrella.alpha += estrella.speed * estrella.direction;
+        if (estrella.alpha > 255 || estrella.alpha < 100) {
+          estrella.direction *= -1;
+        }
+      });
+
+      // Dibujar objetos flotantes
+      objetos.forEach((obj) => {
+        image(obj.img, obj.x, obj.y, obj.size, obj.size);
+
+        obj.x += obj.speedX;
+        obj.y += obj.speedY;
+
+        // Rebotan en los bordes del canvas
+        if (obj.x < 0 || obj.x > width - obj.size) obj.speedX *= -1;
+        if (obj.y < 0 || obj.y > height - obj.size) obj.speedY *= -1;
+      });
+    }
+
+    function windowResized() {
+      const contenedor = document.getElementById("hero");
+      resizeCanvas(contenedor.offsetWidth, contenedor.offsetHeight);
+    }
+  </script>
+        <script src="./js/main.js" defer type="module"></script>
+
+
+  </body>
+  </html>
